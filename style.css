@@ -1,0 +1,30 @@
+body {
+	width: 600px;
+	margin: 40px auto;
+}
+
+#slider {
+	width: 600px;
+	height: 400px;
+	overflow: hidden;
+}
+
+#slider > div {
+	width: 1800px;
+}
+
+#slider img {
+	float: left;
+	width: 600px;
+	height: 400px;
+}
+
+#controls {
+	text-align: center;
+}
+
+#controls button {
+	margin: 20px;
+	padding: 10px;
+	font-size: 2em;
+}
