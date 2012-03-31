@@ -13,7 +13,7 @@ body {
 	width: 1800px;
 }
 
-#slider img {
+#slider .slide {
 	float: left;
 	width: 600px;
 	height: 400px;
