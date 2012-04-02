@@ -3,22 +3,6 @@ body {
 	margin: 40px auto;
 }
 
-#slider {
-	width: 600px;
-	height: 400px;
-	overflow: hidden;
-}
-
-#slider > div {
-	width: 1800px;
-}
-
-#slider .slide {
-	float: left;
-	width: 600px;
-	height: 400px;
-}
-
 #controls {
 	text-align: center;
 }
