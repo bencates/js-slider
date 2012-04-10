@@ -23,6 +23,7 @@ window.Slider = function(slider, controls, options) {
     this.setupSlider();
     this.makeControls(controls || 'controls');
     
+    this.current = 0;
     this.moveTo(this.options.initial);
 };
 
@@ -99,10 +100,53 @@ window.Slider.prototype = {
     },
     
     moveTo : function (target) {
-        if (target >= 0 && target < this.options.size) {
+        if (target != this.current && target >= 0 && target < this.options.size) {
             this.current = target;
-            this.slider.scrollLeft = this.options.width * this.current;
+            new SliderAnimation(this.slider, this.options.width * this.current);
         }
+    }
+};
+
+window.SliderAnimation = function (target, endValue, duration, fps) {
+    duration = duration || 1;
+    fps = fps || 40;
+    this.target = target;
+    this.startValue = target.scrollLeft;
+    this.offset = endValue - this.startValue;
+    this.frame = 0;
+    this.frameTime = 1000 / fps;
+    this.frameCount = duration * fps;
+    
+    this.nextFrame();
+};
+
+window.SliderAnimation.prototype = {
+    nextFrame : function () {
+        this.frame++;
+        this.target.scrollLeft = this.getOffset();
+        
+        var self = this;
+        if (this.frame !== this.frameCount) {
+            setTimeout(function () {
+                self.nextFrame();
+            }, this.frameTime);
+        }
+    },
+    
+    getOffset : function () {
+        var t = this.frame,
+            b = this.startValue,
+            c = this.offset,
+            d = this.frameCount;
+        
+        // linear
+        // return c*t/d + b
+        
+        // quadratic in/out
+        t /= d/2;
+        if (t < 1) return c/2*t*t + b;
+        t--;
+        return -c/2 * (t*(t-2) - 1) + b;
     }
 };
 
